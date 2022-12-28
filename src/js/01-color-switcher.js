@@ -2,18 +2,19 @@ const bodyEl = document.querySelector('body');
 const startBtn = document.querySelector('[data-start]');
 const stopBtn = document.querySelector('[data-stop]');
 
+startBtn.setAttribute("disabled", "disabled");
 let intervalId = null;
 
 function changeBodyColor(){
     intervalId = setInterval(() => {
         bodyEl.style.backgroundColor = getRandomHexColor();
     }, 1000);
-    startBtn.setAttribute("disabled", "disabled");
+    startBtn.disabled = true;
 }
 
 function stopChange(){
     clearInterval(intervalId);
-    startBtn.removeAttribute("disabled");
+    startBtn.disabled = false;
 }
 
 function getRandomHexColor() {

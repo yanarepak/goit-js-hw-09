@@ -51,10 +51,14 @@ const fp = flatpickr('#datetime-picker', options);
 
 const timer = {
   start() {
-      timer.intervalId = setInterval(() => {
+    const interval = timer.intervalId = setInterval(() => {
           const currentTime = Date.now();
           const deltaTime = fp.selectedDates[0] - currentTime;
+          console.log(deltaTime);
+
           if(deltaTime < 0){
+            btnStart.disabled = true;
+          } else {
             btnStart.disabled = true;
           }
           const {days, hours, minutes, seconds} = convertMs(deltaTime);
@@ -65,7 +69,7 @@ const timer = {
           secondsEl.textContent = currentDay(seconds);
 
           if (deltaTime < 1000) {
-            clearInterval(timer.intervalId);
+            clearInterval(interval);
           }
       }, 1000);
   }
